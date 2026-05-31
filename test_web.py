@@ -13,8 +13,8 @@ class TestWebAvailability(unittest.TestCase):
         self.assertEqual(response.status_code, 200, f"Web vratil error kod {response.status_code}")
         
         # overeni konkretniho textu na strance (podle zadani lektora napr. 'Firmy')
-        # search_string = "Firmy"
-        search_string = "TentoRetezecNaSeznamuUrciteNeexistuje12345"
+        search_string = "Firmy"
+        # search_string = "TentoRetezecNaSeznamuUrciteNeexistuje12345"
         
         # pokud string v HTML neni, test hodi error a python vrati exit code 1
         self.assertIn(search_string, response.text, f"Retezec '{search_string}' nenalezen v HTML!")
