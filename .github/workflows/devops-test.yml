@@ -1,0 +1,31 @@
+name: DevOps Lesson 9 - Web Test
+
+# automaticke spusteni pri kazdem pushi do repozitare
+on: [push]
+
+jobs:
+  run-tests:
+    # ciste prostredi ubuntu poskytnute githubem
+    runs-on: ubuntu-latest
+
+    steps:
+    # krok 1: stahnout aktualni kod z githubu do workeru
+    - name: Checkout repozitare
+      uses: actions/checkout@v4
+
+    # krok 2: pripravit python prostredi verze 3.11
+    - name: Nastaveni Pythonu
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.11'
+
+    # krok 3: doinstalovat knihovnu requests (neni v zakladni instalaci)
+    - name: Instalace zavislosti
+      run: |
+        pip install requests
+
+    # krok 4: spustit testovaci skript
+    # pokud skript vrati exit code 1, pipeline se prerusi
+    - name: Spusteni automatickeho testu webu
+      run: |
+        python test_web.py
